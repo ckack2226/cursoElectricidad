@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electricidad Básica para el Hogar · Acceso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ PANTALLA: LOGIN ============ -->
+<section id="pantalla-login" class="pantalla activa">
+  <div class="login-wrap">
+    <div class="login-marca">
+      <div class="marca-icono" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="40" height="40">
+          <path d="M26 2 L10 26 H21 L18 46 L38 18 H26 Z" fill="var(--safety-yellow)"/>
+        </svg>
+      </div>
+      <p class="marca-eyebrow">SIMULACIÓN DE AULA VIRTUAL</p>
+      <h1 class="marca-titulo">Electricidad Básica<br>para el Hogar</h1>
+      <p class="marca-sub">Identifica el tablero, entiende fase y neutro, y aprende a hacer instalaciones simples de forma segura.</p>
+    </div>
+
+    <form id="form-login" class="login-caja" autocomplete="off">
+      <p class="login-caja-eyebrow">ACCESO AL CURSO</p>
+      <label for="input-usuario">Usuario</label>
+      <input id="input-usuario" name="usuario" type="text" placeholder="ej: juan" required>
+
+      <label for="input-clave">Contraseña</label>
+      <input id="input-clave" name="clave" type="password" placeholder="••••" required>
+
+      <button type="submit" class="btn btn-primario btn-ancho">Ingresar al curso →</button>
+      <p id="login-error" class="login-error" hidden>Usuario o contraseña incorrectos.</p>
+    </form>
+  </div>
+</section>
+
+<script src="script-login.js"></script>
+</body>
+</html>

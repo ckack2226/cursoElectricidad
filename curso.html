@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electricidad Básica para el Hogar · Curso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ APP (post-login) ============ -->
+<div id="app" class="app">
+
+  <!-- Panel lateral tipo tablero de breakers = navegación / progreso -->
+  <aside class="tablero" aria-label="Panel de progreso del curso">
+    <div class="tablero-cabecera">
+      <span class="tablero-cabecera-punto"></span>
+      <div>
+        <p class="tablero-cabecera-titulo">PANEL PRINCIPAL</p>
+        <p class="tablero-cabecera-sub">Recorrido del curso</p>
+      </div>
+    </div>
+
+    <nav id="lista-switches" class="lista-switches"></nav>
+
+    <div class="tablero-medidor">
+      <p class="medidor-label">AVANCE TOTAL</p>
+      <div class="medidor-barra"><div id="medidor-fill" class="medidor-fill" style="width:0%"></div></div>
+      <p id="medidor-valor" class="medidor-valor">0%</p>
+    </div>
+
+    <button id="btn-logout" class="btn-logout">⏻ Cerrar sesión</button>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="contenido">
+
+    <header class="topbar">
+      <div>
+        <p class="topbar-eyebrow" id="topbar-eyebrow">PASO 1 · CURSO</p>
+        <h2 id="topbar-titulo">Ingresar al curso</h2>
+      </div>
+      <div class="topbar-usuario">
+        <span class="led-verde" aria-hidden="true"></span>
+        <span>Conectado como <strong id="usuario-actual">—</strong></span>
+      </div>
+    </header>
+
+    <!-- PASO 1: Bienvenida / entrar al curso -->
+    <section id="paso-curso" class="paso paso-activo">
+      <div class="tarjeta">
+        <p class="etiqueta-modulo">Curso</p>
+        <h3>Electricidad básica para el hogar</h3>
+        <p>Este curso te lleva paso a paso por lo esencial para entender y resolver tareas eléctricas simples y seguras en casa. Al terminar podrás:</p>
+        <ul class="lista-check" id="lista-temas"></ul>
+        <button class="btn btn-primario" data-ir="anuncio">Entrar al curso →</button>
+      </div>
+    </section>
+
+    <!-- PASO 2: Anuncio -->
+    <section id="paso-anuncio" class="paso">
+      <div class="tarjeta anuncio">
+        <p class="etiqueta-modulo">Anuncio inicial</p>
+        <h3>Bienvenido(a) al curso ⚡</h3>
+        <p class="anuncio-fecha">Publicado por el instructor · Módulo 0</p>
+        <p>Antes de empezar, ten en cuenta estas reglas de seguridad que vas a usar durante todo el curso:</p>
+        <ol class="lista-numerada">
+          <li>Nunca trabajes un circuito energizado: siempre baja el breaker correspondiente primero.</li>
+          <li>Verifica con un multímetro que no hay tensión antes de tocar cualquier cable, incluido el neutro.</li>
+          <li>Usa el color de cable correcto: fase, neutro y tierra no se intercambian.</li>
+          <li>Ante cualquier duda, consulta a un electricista certificado. Este curso es una introducción, no reemplaza la asesoría profesional.</li>
+        </ol>
+        <p>En este módulo vas a: descargar una guía de referencia, ver un video sobre el tablero de breakers, participar en el foro, entregar una tarea práctica y presentar un cuestionario final.</p>
+        <button class="btn btn-primario" data-ir="documento">Continuar →</button>
+      </div>
+    </section>
+
+    <!-- PASO 3: Documento -->
+    <section id="paso-documento" class="paso">
+      <div class="tarjeta">
+        <p class="etiqueta-modulo">Material de lectura</p>
+        <h3>Guía: Tablero de breakers y Fase / Neutro</h3>
+        <p>Descarga esta guía en PDF con lo esencial sobre el tablero eléctrico, sus partes, y la diferencia entre fase, neutro y tierra.</p>
+        <div class="descarga-caja">
+          <div class="descarga-icono" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/>
+            </svg>
+          </div>
+          <div class="descarga-info">
+            <p class="descarga-nombre">guia-tablero-y-fase-neutro.pdf</p>
+            <p class="descarga-detalle">PDF · Guía de referencia</p>
+          </div>
+          <a id="link-descarga" href="guia-tablero-y-fase-neutro.pdf" download class="btn btn-secundario">Descargar</a>
+        </div>
+        <p id="descarga-confirmacion" class="confirmacion" hidden>✓ Documento descargado. Ya puedes continuar.</p>
+        <button class="btn btn-primario" id="btn-continuar-documento" data-ir="video" disabled>Continuar →</button>
+      </div>
+    </section>
+
+    <!-- PASO 4: Video -->
+    <section id="paso-video" class="paso">
+      <div class="tarjeta">
+        <p class="etiqueta-modulo">Video de la clase</p>
+        <h3>Cómo identificar el tablero de breakers</h3>
+        <div class="video-envoltorio">
+          <iframe id="video-frame" src="https://youtu.be/VwOkqM4j-ts?si=gkLB6X1ZTlBgm-gP" title="Video del curso" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <p id="video-confirmacion" class="confirmacion" hidden>✓ Video marcado como visto.</p>
+        <div class="fila-botones">
+          <button class="btn btn-secundario" id="btn-marcar-video">Marcar video como visto</button>
+          <button class="btn btn-primario" id="btn-continuar-video" data-ir="foro" disabled>Continuar →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PASO 5: Foro -->
+    <section id="paso-foro" class="paso">
+      <div class="tarjeta">
+        <p class="etiqueta-modulo">Foro de discusión</p>
+        <h3>Comparte tu experiencia</h3>
+        <p class="foro-pregunta">¿Ya identificaste el tablero de breakers en tu casa? Cuéntale al grupo qué encontraste (o qué dudas tienes sobre fase, neutro, o el cableado).</p>
+
+        <form id="form-foro" class="foro-form">
+          <textarea id="foro-texto" rows="3" placeholder="Escribe tu aporte al foro..." required></textarea>
+          <button type="submit" class="btn btn-primario">Publicar</button>
+        </form>
+
+        <div id="foro-lista" class="foro-lista"></div>
+
+        <button class="btn btn-primario" data-ir="tarea" id="btn-continuar-foro" disabled>Continuar →</button>
+      </div>
+    </section>
+
+    <!-- PASO 6: Tarea -->
+    <section id="paso-tarea" class="paso">
+      <div class="tarjeta">
+        <p class="etiqueta-modulo">Tarea</p>
+        <h3>Calcular el consumo de un electrodoméstico</h3>
+        <p>Elige un electrodoméstico de tu casa y calcula su consumo. Usa la fórmula:</p>
+        <p class="formula">Consumo (kWh) = Potencia (W) × Horas de uso al día ÷ 1000</p>
+
+        <form id="form-tarea" class="tarea-form">
+          <label for="tarea-aparato">Electrodoméstico</label>
+          <input id="tarea-aparato" type="text" placeholder="Ej: Nevera, plancha, televisor..." required>
+
+          <div class="tarea-grid">
+            <div>
+              <label for="tarea-potencia">Potencia (Watts)</label>
+              <input id="tarea-potencia" type="number" min="1" placeholder="Ej: 1200" required>
+            </div>
+            <div>
+              <label for="tarea-horas">Horas de uso al día</label>
+              <input id="tarea-horas" type="number" min="0" step="0.1" placeholder="Ej: 2" required>
+            </div>
+          </div>
+
+          <div class="tarea-resultado" id="tarea-resultado">
+            Resultado: <strong id="tarea-resultado-valor">— kWh/día</strong>
+          </div>
+
+          <label for="tarea-comentario">Comentario para el instructor (opcional)</label>
+          <textarea id="tarea-comentario" rows="2" placeholder="Notas sobre tu cálculo..."></textarea>
+
+          <button type="submit" class="btn btn-primario btn-ancho">Entregar tarea</button>
+        </form>
+
+        <p id="tarea-confirmacion" class="confirmacion" hidden>✓ Tarea entregada correctamente.</p>
+        <button class="btn btn-primario" data-ir="cuestionario" id="btn-continuar-tarea" disabled>Continuar →</button>
+      </div>
+    </section>
+
+    <!-- PASO 7: Cuestionario -->
+    <section id="paso-cuestionario" class="paso">
+      <div class="tarjeta">
+        <p class="etiqueta-modulo">Cuestionario final</p>
+        <h3>Pon a prueba lo aprendido</h3>
+        <p>Responde las siguientes preguntas. Necesitas 60% o más para aprobar.</p>
+        <form id="form-quiz"></form>
+        <button type="submit" form="form-quiz" class="btn btn-primario btn-ancho" id="btn-enviar-quiz">Enviar cuestionario</button>
+      </div>
+    </section>
+
+    <!-- PASO 8: Calificación -->
+    <section id="paso-calificacion" class="paso">
+      <div class="tarjeta calificacion-tarjeta">
+        <p class="etiqueta-modulo">Calificación final</p>
+        <h3>Resultado del curso</h3>
+
+        <div class="medidor-circular" id="medidor-circular">
+          <span id="calificacion-porcentaje">0%</span>
+        </div>
+        <p id="calificacion-estado" class="calificacion-estado">—</p>
+
+        <div class="resumen-lista" id="resumen-lista"></div>
+
+        <button class="btn btn-secundario btn-ancho" id="btn-reiniciar">Reiniciar simulación</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script-app.js"></script>
+</body>
+</html>
